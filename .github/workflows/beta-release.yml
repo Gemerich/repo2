@@ -1,0 +1,25 @@
+# References:
+## https://github.com/marketplace/actions/merge-conflict-finder
+## https://blog.marcnuri.com/triggering-github-actions-across-different-repositories
+## https://github.com/marketplace/actions/merge-branch
+
+name: Beta Release Remote Action Responder
+
+on: [repository_dispatch]
+
+jobs:
+  sync-branch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Event Information
+        run: |
+          echo "Event '${{ github.event.action }}' received from '${{ github.event.client_payload.repository }}'"
+      - uses: actions/checkout@master
+      - name: Merge development -> beta
+        if: github.event.action == 'merge-dev-to-beta'
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          from_branch: development
+          target_branch: beta
+          github_token: ${{ github.token }}
