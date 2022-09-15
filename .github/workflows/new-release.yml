@@ -3,12 +3,14 @@
 ## https://blog.marcnuri.com/triggering-github-actions-across-different-repositories
 ## https://github.com/marketplace/actions/merge-branch
 
-name: Beta Release Remote Action Responder
+name: New Release
 
 on:
   workflow_dispatch:
     inputs:
       distinct_id:
+        description: 'Distinct ID'
+        required: true
 
 jobs:
   test:
