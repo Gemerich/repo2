@@ -27,6 +27,9 @@ jobs:
       #     github_token: ${{ github.token }}
 
       - uses: actions/checkout@v3
+        with:
+          ref: beta
+      - uses: actions/checkout@v3
       - run: |
           git merge --no-commit --no-ff origin/beta
           echo $?
