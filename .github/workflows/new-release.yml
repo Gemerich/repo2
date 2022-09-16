@@ -30,6 +30,8 @@ jobs:
         with:
           fetch-depth: 0
       - run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
           git merge --no-commit --no-ff origin/development
           echo $?
           git merge --abort
