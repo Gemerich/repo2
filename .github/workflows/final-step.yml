@@ -24,7 +24,6 @@ on:
 
 jobs:
   execute-tagging:
-    needs: [merge-branches]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -34,3 +33,9 @@ jobs:
       - name: Set environment variables from project settings
         run: |
           exec .github/scripts/run.sh ${{ github.event.inputs.release }} ${{ github.event.inputs.version_number }}
+
+      - name: Merge release -> beta
+        run: |
+          git checkout beta
+          git tag "v-${{ github.event.inputs.build-type }}-release-${{ env.version-number }}"
+          git push origin --tags
