@@ -99,5 +99,6 @@ jobs:
       - name: Tag
         run: |
           git checkout beta
+          git pull
           git tag "v-${{ github.event.inputs.build-type }}-release-${{ github.event.inputs.version_number }}"
           git push origin --tags
